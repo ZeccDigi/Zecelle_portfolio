@@ -1,0 +1,1321 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zecelle Portfolio</title>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal-deep: #0a2e2e;
+      --teal-mid: #0d4f4f;
+      --teal-bright: #14b8a6;
+      --teal-light: #5eead4;
+      --gold: #f0c060;
+      --gold-light: #fde68a;
+      --white: #f0fafa;
+      --glass: rgba(255,255,255,0.06);
+      --glass-border: rgba(94,234,212,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--teal-deep);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(10,46,46,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: .9rem;
+  letter-spacing: .04em;
+  color: var(--teal-bright);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+    }
+   .nav-logo span {
+  background: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.nav-logo span img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: rgba(240,250,250,.65);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+      align-items: center;
+      padding: 7.5rem clamp(1.5rem, 5vw, 4rem) 4rem;
+      position: relative;
+      gap: clamp(2rem, 5vw, 4.5rem);
+    }
+    .hero-bg {
+      position: absolute; inset: 0; overflow: hidden; z-index: -1;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(20,184,166,.22) 0%, transparent 65%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(240,192,96,.12) 0%, transparent 65%);
+      bottom: 50px; left: 10%;
+      border-radius: 50%;
+    }
+
+    .hero-text { z-index: 1; max-width: 620px; }
+    .hero-eyebrow {
+      font-size: .8rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 32px; height: 2px;
+      background: var(--teal-bright);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 5.2vw, 4.8rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    h1 .accent { color: var(--teal-bright); }
+    h1 .accent-gold { color: var(--gold); }
+
+    .hero-intro {
+      display: inline-block;
+      font-size: 1.25rem;
+      line-height: 1.35;
+      margin-bottom: .25rem;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(240,250,250,.72);
+      max-width: 560px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-desc-secondary {
+      margin-top: -1rem;
+      margin-bottom: 1.6rem;
+      color: rgba(240,250,250,.82);
+    }
+
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      margin-bottom: 2rem;
+    }
+    .tag {
+      padding: .3rem .9rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 100px;
+      font-size: .78rem;
+      color: var(--teal-light);
+      background: var(--glass);
+      letter-spacing: .03em;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: .85rem 2rem;
+      background: var(--teal-bright);
+      color: var(--teal-deep);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 0 0 rgba(20,184,166,0);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(20,184,166,.35);
+    }
+    .btn-ghost {
+      padding: .85rem 2rem;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--teal-bright);
+      background: rgba(20,184,166,.08);
+    }
+
+    /* ── HERO RIGHT (photo card) ── */
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      display: flex; justify-content: center;
+    }
+    .photo-frame {
+      width: min(340px, 82vw); height: min(420px, 102vw);
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--teal-mid), rgba(20,184,166,.2));
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,.4);
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .photo-frame::before {
+      content: 'Z';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12rem;
+      font-weight: 800;
+      color: rgba(20,184,166,.08);
+      line-height: 1;
+      user-select: none;
+    }
+    .photo-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(10,46,46,.85);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--glass-border);
+      padding: 1rem 1.5rem;
+      text-align: center;
+    }
+    .photo-label strong {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+    .photo-label small {
+      font-size: .75rem;
+      color: var(--teal-light);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: -16px; right: -24px;
+      background: var(--gold);
+      color: var(--teal-deep);
+      padding: .5rem .9rem;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: .78rem;
+      box-shadow: 0 8px 24px rgba(240,192,96,.3);
+      transform: rotate(3deg);
+    }
+    .floating-tools {
+      position: absolute;
+      bottom: 120px; left: -24px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: .75rem 1rem;
+      font-size: .78rem;
+      color: var(--teal-light);
+    }
+    .floating-tools span { display: block; color: rgba(240,250,250,.5); font-size: .7rem; margin-bottom: .3rem; }
+
+    /* ── SECTION STYLES ── */
+    section {
+      padding: 6rem 3rem;
+      position: relative;
+    }
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+    .section-eyebrow {
+      font-size: .75rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+      margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 20px; height: 2px;
+      background: var(--teal-bright);
+      display: block;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+
+    /* ── WORKS GRID ── */
+    #works { background: rgba(255,255,255,.015); }
+    .works-nav {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .works-filter {
+      padding: .4rem 1.1rem;
+      border-radius: 100px;
+      border: 1px solid var(--glass-border);
+      background: transparent;
+      color: rgba(240,250,250,.6);
+      font-size: .82rem;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .works-filter.active,
+    .works-filter:hover {
+      background: var(--teal-bright);
+      color: var(--teal-deep);
+      border-color: var(--teal-bright);
+      font-weight: 600;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .work-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative;
+    }
+    .work-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      border-color: rgba(94,234,212,.3);
+    }
+    .work-card-thumb {
+      width: 100%; aspect-ratio: 16/10;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .work-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      padding: .5rem;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+    }
+    .work-gallery-preview {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .5rem;
+      padding: .65rem;
+      align-items: center;
+    }
+    .work-gallery-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 10px 22px rgba(0,0,0,.28);
+    }
+    .modal-gallery {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .modal-gallery img {
+      width: 100%;
+      height: min(52vh, 430px);
+      object-fit: contain;
+      display: block;
+      padding: .5rem;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    @media (max-width: 768px) {
+      .modal-gallery { grid-template-columns: 1fr; }
+      .modal-gallery img { height: auto; max-height: 70vh; }
+    }
+    .work-card-body { padding: 1.25rem; }
+    .work-card-cat {
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--teal-bright);
+      margin-bottom: .4rem;
+    }
+    .work-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+      color: var(--white);
+    }
+    .work-card-desc {
+      font-size: .83rem;
+      line-height: 1.6;
+      color: rgba(240,250,250,.55);
+    }
+    .work-badge {
+      position: absolute;
+      top: .8rem; right: .8rem;
+      background: rgba(10,46,46,.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      border-radius: 100px;
+      padding: .25rem .7rem;
+      font-size: .7rem;
+      color: var(--teal-light);
+    }
+
+    /* color themes for card thumbs */
+    .thumb-ui    { background: linear-gradient(135deg, #0d4f4f, #1a6b7a); }
+    .thumb-logo  { background: linear-gradient(135deg, #1a2a1a, #2a4a2a); }
+    .thumb-info  { background: linear-gradient(135deg, #1a1a3a, #2a2a5a); }
+    .thumb-art   { background: linear-gradient(135deg, #3a1a2a, #5a2a3a); }
+    .thumb-busy  { background: linear-gradient(135deg, #3a2a0a, #5a4a1a); }
+    .thumb-prod  { background: linear-gradient(135deg, #2a0a3a, #4a1a5a); }
+    .thumb-web   { background: linear-gradient(135deg, #0a2a3a, #1a4a5a); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(5,20,20,.85);
+      backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .modal-box {
+      background: linear-gradient(145deg, #0d3535, #0a2e2e);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      max-width: 980px; width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0,0,0,.6);
+      padding: 2.5rem;
+      position: relative;
+    }    .modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      width: 36px; height: 36px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: rgba(20,184,166,.2); }
+    .modal-thumb {
+      width: 100%; min-height: 160px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      margin-bottom: 1.75rem;
+      overflow: hidden;
+    }
+    .modal-preview {
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      display: block;
+      padding: 1rem;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,.38));
+    }    .modal-cat {
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--teal-bright); margin-bottom: .5rem;
+    }
+    .modal-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .modal-desc {
+      font-size: .95rem; line-height: 1.75;
+      color: rgba(240,250,250,.7);
+      margin-bottom: 1.5rem;
+    }
+    .modal-tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .hire-links {
+      display: grid;
+      gap: .8rem;
+      margin-top: 1.25rem;
+    }
+    .hire-link {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      color: var(--teal-light);
+      text-decoration: none;
+      padding: .9rem 1rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .hire-link:hover {
+      border-color: var(--teal-bright);
+      background: rgba(20,184,166,.1);
+      transform: translateY(-1px);
+    }
+    .hire-link img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 5px;
+      background: #fff;
+    }
+    .cert-link {
+      color: var(--teal-light);
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .cert-box {
+      position: relative;
+      width: min(920px, 96vw);
+      max-height: 90vh;
+      background: #0d3535;
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 40px 100px rgba(0,0,0,.6);
+    }
+    .cert-image {
+      width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      display: block;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(3rem, 6vw, 5rem);
+      align-items: start;
+    }
+    #about > div {
+      min-width: 0;
+    }
+    #contact {
+      padding-top: .15rem;
+    }
+    #about .section-title {
+      min-height: 2.15em;
+    }
+    #about .divider {
+      margin-bottom: 2rem;
+    }
+    .about-copy {
+      color: rgba(240,250,250,.65);
+      line-height: 1.75;
+      font-size: .95rem;
+      margin-bottom: 1.75rem;
+      max-width: 620px;
+    }
+    .about-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+    .about-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--teal-light);
+    }
+    .skill-item {
+      margin-bottom: 1rem;
+    }
+    .skill-header {
+      display: flex; justify-content: space-between;
+      font-size: .85rem;
+      margin-bottom: .4rem;
+      color: rgba(240,250,250,.8);
+    }
+    .skill-bar {
+      height: 5px;
+      background: rgba(255,255,255,.08);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal-bright), var(--teal-light));
+      border-radius: 100px;
+      transition: width 1s ease;
+    }
+    .contact-list { list-style: none; }
+    .contact-list li {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .65rem 0;
+      border-bottom: 1px solid var(--glass-border);
+      font-size: .9rem;
+      color: rgba(240,250,250,.75);
+    }
+    .contact-list li:last-child { border: none; }
+    .contact-icon img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      display: block;
+      border-radius: 4px;
+    }
+    .contact-icon {
+      width: 32px; height: 32px;
+      background: rgba(20,184,166,.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 1px solid var(--glass-border);
+      font-size: .82rem;
+      color: rgba(240,250,250,.3);
+    }
+    footer strong { color: var(--teal-bright); }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(240,250,250,.3);
+      animation: bob 2s ease-in-out infinite;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--teal-bright));
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+      border-radius: 100px;
+      margin: 1.2rem 0 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-card { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #about { grid-template-columns: 1fr; gap: 2rem; }
+      #about .section-title { min-height: auto; }
+      #contact { padding-top: 0; }
+      .works-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ANIMATION */
+    [x-cloak] { display: none !important; }
+    .fade-in { animation: fadeIn .4s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body x-data="portfolio()" x-cloak>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <span><img src="assets/images/Logos/logaurZ.png" alt="logo"></span> zecellequijano
+    </div>
+    <ul class="nav-links">
+      <li><a href="#works">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="btn-primary" style="font-size:.82rem;padding:.6rem 1.3rem;" @click="hireModal = true">Hire Me</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-text">
+      <p class="hero-eyebrow">Graphic Designer | UI/UX </p>
+      <h1>
+        <span class="accent-gold">Portfolio</span>
+      </h1>
+      <p class="hero-desc">
+        <span class="hero-intro">Hi, I'm <strong style="color:var(--white)">Zecelle!</strong></span><br>
+        A BSIS student and self-taught graphic designer who enjoys creating clean, creative, and user-friendly visuals. My works are created for both academic and personal purposes, including logos, infographics, mobile app designs, and web interfaces.
+      </p>
+      <p class="hero-desc hero-desc-secondary">
+        Browse my work below and let's create something amazing together!
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Canva</span>
+        <span class="tag">Photoshop</span>
+        <span class="tag">CapCut</span>
+        <span class="tag">Figma</span>
+        <span class="tag">HTML / Tailwind</span>
+        
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" @click="scrollTo('works')">View My Work</button>
+        <button class="btn-ghost" @click="scrollTo('contact')">Contact Me</button>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="photo-frame">
+        <img src="assets/images/Me .jpg" alt="Zecelle Photo" style="width:100%;height:100%;object-fit:cover;">
+         
+        <div class="photo-label">
+          <strong>Zecelle Quijano</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+    <div class="section-header">
+      <p class="section-eyebrow">Portfolio</p>
+      <h2 class="section-title">Design Space</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="works-nav">
+      <template x-for="cat in categories" :key="cat">
+        <button
+          class="works-filter"
+          :class="{ active: activeFilter === cat }"
+          @click="activeFilter = cat"
+          x-text="cat">
+        </button>
+      </template>
+    </div>
+
+    <div class="works-grid">
+      <template x-for="(item, idx) in filteredWorks" :key="idx">
+        <div class="work-card fade-in" @click="openModal(item)">
+          <div class="work-card-thumb" :class="item.thumbClass">
+            <template x-if="item.gallery">
+              <div class="work-gallery-preview">
+                <template x-for="logo in item.gallery" :key="logo.src">
+                  <img :src="logo.src" :alt="logo.alt">
+                </template>
+              </div>
+            </template>
+            <template x-if="!item.gallery && item.image">
+              <img class="work-preview" :src="item.image" :alt="item.title + ' preview'">
+            </template>
+            <template x-if="!item.gallery && !item.image">
+              <span x-text="item.emoji" style="filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))"></span>
+            </template>
+            <span class="work-badge" x-text="item.badge"></span>
+          </div>          <div class="work-card-body">
+            <p class="work-card-cat" x-text="item.category"></p>
+            <h3 class="work-card-title" x-text="item.title"></h3>
+            <p class="work-card-desc" x-text="item.shortDesc"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- ABOUT & CONTACT -->
+  <section id="about">
+    <div>
+      <p class="section-eyebrow">About Me</p>
+      <h2 class="section-title">Skills &<br>Background</h2>
+      <div class="divider"></div>
+      <p class="about-copy">
+        I'm a student passionate about <strong style="color:var(--teal-light)">graphic design, digital arts, and UI/UX.</strong> I'm currently the Project Developer for our capstone — building with HTML, Tailwind CSS, Laravel and MySQL. I'm also a certified <button type="button" class="cert-link" @click="certModal = true">Cisco NetAcad HTML Essentials</button> completer.
+      </p>
+      <div class="about-card">
+        <h3>Core Skills</h3>
+        <template x-for="skill in skills" :key="skill.name">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span x-text="skill.name"></span>
+              <span x-text="skill.level + '%'"></span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-fill" :style="'width:' + skill.level + '%'"></div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div id="contact">
+      <p class="section-eyebrow">Get in Touch</p>
+      <h2 class="section-title">Contact &<br>Socials</h2>
+      <div class="divider"></div>
+      <div class="about-card" style="margin-bottom:1.25rem;">
+        <h3>Contact Info</h3>
+        <ul class="contact-list">
+          <li><span class="contact-icon">📞</span> +63 9121833954</li>
+          <li><span class="contact-icon">✉️</span> quijanozelle@gmail.com</li>
+          <li><span class="contact-icon">📍</span> Panabo City, Davao del Norte, PH</li>
+        </ul>
+      </div>
+      <div class="about-card">
+        <h3>Find Me Online</h3>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-icon"><img src="https://i.pinimg.com/1200x/b2/f8/28/b2f828513f21444829a619ce563d4d4e.jpg" alt="LinkedIn"></span>
+            <a href="https://www.linkedin.com/in/zecelle-quijano-989a17366" target="_blank" style="color:var(--teal-light);text-decoration:none;">
+              linkedin.com/in/zecelle-quijano-989a17366
+            </a>
+          </li>
+          <li>
+            <span class="contact-icon"><img src="https://youronlinerevenue.com/wp-content/uploads/2019/04/onlinejobs.ph-logog.jpeg" alt="OnlineJobs.ph"></span>
+            <a href="https://www.onlinejobs.ph/jobseekers/info/3863822" target="_blank" style="color:var(--teal-light);text-decoration:none;">
+              onlinejobs.ph/jobseekers/info/3863822
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Designed &amp; built by <strong>Zecelle Quijano</strong> · Graphic Designer · UI/UX </p>
+    <p style="margin-top:.4rem;">Panabo City, Davao del Norte, Philippines</p>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay fade-in" x-show="modal" @click.self="modal = null" x-transition>
+    <div class="modal-box" x-show="modal" @click.stop>
+      <button class="modal-close" @click="modal = null">✕</button>
+      <template x-if="modal">
+        <div>
+          <div class="modal-thumb" :class="modal.thumbClass">
+            <template x-if="modal.gallery">
+              <div class="modal-gallery">
+                <template x-for="logo in modal.gallery" :key="logo.src">
+                  <img :src="logo.src" :alt="logo.alt">
+                </template>
+              </div>
+            </template>
+            <template x-if="!modal.gallery && modal.image">
+              <img class="modal-preview" :src="modal.image" :alt="modal.title + ' mobile screens'">
+            </template>
+            <template x-if="!modal.gallery && !modal.image">
+              <span x-text="modal.emoji" style="font-size:5rem"></span>
+            </template>
+          </div>          <p class="modal-cat" x-text="modal.category"></p>
+          <h2 class="modal-title" x-text="modal.title"></h2>
+          <p class="modal-desc" x-text="modal.desc"></p>
+          <div class="modal-tags">
+            <template x-for="t in modal.tags" :key="t">
+              <span class="tag" x-text="t"></span>
+            </template>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+
+  <!-- HIRE OVERLAY -->
+  <div class="modal-overlay fade-in" x-show="hireModal" @click.self="hireModal = false" x-transition>
+    <div class="modal-box" x-show="hireModal" @click.stop style="max-width:560px;">
+      <button class="modal-close" @click="hireModal = false">✕</button>
+      <p class="modal-cat">Hire Me</p>
+      <h2 class="modal-title">Work With Zecelle</h2>
+      <p class="modal-desc">Connect with me through LinkedIn or OnlineJobs.ph.</p>
+      <div class="hire-links">
+        <a class="hire-link" href="https://www.linkedin.com/in/zecelle-quijano-989a17366" target="_blank">
+          <img src="https://i.pinimg.com/1200x/b2/f8/28/b2f828513f21444829a619ce563d4d4e.jpg" alt="LinkedIn">
+          linkedin.com/in/zecelle-quijano-989a17366
+        </a>
+        <a class="hire-link" href="https://www.onlinejobs.ph/jobseekers/info/3863822" target="_blank">
+          <img src="https://youronlinerevenue.com/wp-content/uploads/2019/04/onlinejobs.ph-logog.jpeg" alt="OnlineJobs.ph">
+          onlinejobs.ph/jobseekers/info/3863822
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- CERTIFICATE OVERLAY -->
+  <div class="modal-overlay fade-in" x-show="certModal" @click.self="certModal = false" x-transition>
+    <div class="cert-box" x-show="certModal" @click.stop>
+      <button class="modal-close" @click="certModal = false">✕</button>
+      <img class="cert-image" src="assets/nectAcad HTML cert.png" alt="Cisco NetAcad HTML Essentials certificate">
+    </div>
+  </div>
+  <script>
+    function portfolio() {
+      return {
+        modal: null,
+        certModal: false,
+        hireModal: false,
+        activeFilter: 'All',
+        categories: ['All','UI/UX','Logo','Brochure','Infographics','Digital Art','Busy Book','Product Design',],
+        skills: [
+          { name: 'Canva', level: 92 },
+          { name: 'Adobe Photoshop', level: 78 },
+          { name: 'UI/UX Design (Figma)', level: 80 },
+          { name: 'HTML / Tailwind CSS', level: 72 },
+          { name: 'Digital Illustration', level: 75 },
+          { name: 'Video Editing (CapCut)', level: 85 },
+          { name: 'Document Management', level: 88 },
+        ],
+        works: [
+          {
+            category: 'UI/UX',
+            title: 'ParkWise',
+            thumbClass: 'thumb-ui',
+            image: 'assets/images/DPAS/parkwise 4.png',
+            badge: 'Mobile App',
+            shortDesc: 'A parking solution app with real-time slot availability and reservation flow.',
+            desc: 'ParkWise is a mobile UI/UX project designed to help drivers find parking spaces faster. It features real-time parking availability, slot reservation with date/time scheduling, and a reservation history view. Designed from scratch using Canva and Figma principles.',
+          },
+          {
+            category: 'UI/UX',
+            title: 'DPAS',
+            emoji: '🚨',
+            thumbClass: 'thumb-ui',
+            image: 'assets/images/DPAS/DPAS.png',
+            badge: 'Mobile App',
+            shortDesc: 'Disaster Preparedness Alert System — real-time disaster reporting mobile app.',
+            desc: 'DPAS (Disaster Preparedness Alert System) is a mobile app designed to report disasters in real time and notify alerts to keep users prepared. Features include a weather map, safety preparedness tips by disaster type, a disaster report submission form, and a community report history feed. I served as the UI/UX Designer in the team.',
+          },
+          {
+            category: 'UI/UX',
+            title: 'HRIS Web System',
+            thumbClass: 'thumb-web',
+            gallery: [
+              { src: 'assets/images/DPAS/login.png', alt: 'HRIS login screen' },
+              { src: 'assets/images/DPAS/dashboard.png', alt: 'HRIS dashboard screen' },
+            ],
+            badge: 'Capstone',
+            shortDesc: 'A web-based HR system for the Department of Migrant Workers, built with Laravel & Tailwind.',
+            desc: 'Currently serving as Project Developer for a capstone web system built for the Department of Migrant Workers. The system features an HR dashboard, employee management, and data modules developed using HTML, Tailwind CSS, Laravel, and MySQL. Zecelle handles both the UI design and front-end development.',   
+          },
+
+          {
+            category: 'Logo',
+            title: 'XiTechs',
+            thumbClass: 'thumb-logo',
+            image: 'assets/images/Logos/xitechs.png',
+            badge: 'Branding',
+            shortDesc: 'A tech-focused logo identity designed for XiTechs.',
+            desc: 'A modern logo concept for XiTechs, built around a clean technology-oriented identity.',
+          },
+          {
+            category: 'Logo',
+            title: 'HRIS',
+            thumbClass: 'thumb-logo',
+            image: 'assets/images/Logos/hrislogo.png',
+            badge: 'Organization',
+            shortDesc: 'A logo identity for the HRYS web system project.',
+            desc: 'A brand mark designed for HRYS, supporting the visual identity of a web-based HR system project.',
+          },
+          {
+            category: 'Logo',
+            title: 'ParkWise',
+            thumbClass: 'thumb-logo',
+            image: 'assets/images/Logos/parkwise.png',
+            badge: 'Branding',
+            shortDesc: 'A parking app logo created for the ParkWise UI/UX project.',
+            desc: 'A clean app logo made for ParkWise, a parking solution mobile UI/UX concept.',
+          },
+          {
+            category: 'Logo',
+            title: 'Sugilanon Films',
+            thumbClass: 'thumb-logo',
+            image: 'assets/images/Logos/sugilanon.png',
+            badge: 'Short Film',
+            shortDesc: 'A cinematic logo mark designed for Sugilanon Films.',
+            desc: 'A film-inspired logo identity created for Sugilanon Films, with emphasis on a strong visual emblem.',
+          },
+          {
+            category: 'Logo',
+            title: 'NovaNest',
+            thumbClass: 'thumb-logo',
+            image: 'assets/images/Logos/novanest.png',
+            badge: 'Branding',
+            shortDesc: 'A playful brand logo created for NovaNest.',
+            desc: 'A logo concept for NovaNest, designed with a friendly and recognizable brand personality.',
+          },
+          {
+            category: 'Logo',
+            title: 'Conserve Nature',
+            thumbClass: 'thumb-logo',
+            image: 'assets/images/Logos/1.png',
+            badge: 'Project',
+            shortDesc: 'A clean logo mark designed for the Planet brand identity.',
+            desc: 'A logo design created as part of Zecelle\'s branding collection, focused on a distinct and memorable visual identity.',
+          },
+          {
+            category: 'Brochure',
+            title: 'ParkWise Close Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/1.png',
+            badge: 'Print Design',
+            shortDesc: 'A ParkWise brochure page presenting the parking app concept and features.',
+            desc: 'A brochure design for ParkWise, created to introduce the parking solution app with clean visual structure and clear feature highlights.',
+          },
+          {
+            category: 'Brochure',
+            title: 'ParkWise Inner Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/2.png',
+            badge: 'Print Design',
+            shortDesc: 'A second ParkWise brochure page continuing the app information layout.',
+            desc: 'A continuation of the ParkWise brochure design, supporting the app presentation with an organized and readable print layout.',
+          },
+          {
+            category: 'Brochure',
+            title: 'Waste Management Close Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/green 1.png',
+            badge: 'Print Design',
+            shortDesc: 'An environmental brochure page focused on nature and waste management awareness.',
+            desc: 'A brochure page designed for environmental awareness, presenting waste management information with a clean and nature-focused visual style.',
+          },
+          {
+            category: 'Brochure',
+            title: 'Waste Management Inner Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/green 2.png',
+            badge: 'Print Design',
+            shortDesc: 'A second environmental brochure page for waste management content.',
+            desc: 'A continuation of the environmental brochure design, created to communicate waste management ideas in a clear and visual format.',
+          },
+          {
+            category: 'Brochure',
+            title: 'Marxism Front Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/marxism.png',
+            badge: 'Print Design',
+            shortDesc: 'An academic brochure page about Marxism and popular culture.',
+            desc: 'A brochure design for an academic topic on Marxism and popular culture, arranged to make the information structured and readable.',
+          },
+          {
+            category: 'Brochure',
+            title: 'Chemistry Outside Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/chemistryOut.jpg',
+            badge: 'Print Design',
+            shortDesc: 'A chemistry brochure outside page with a clean academic layout.',
+            desc: 'A chemistry-themed brochure page designed for academic presentation, using structured sections and polished visual composition.',
+          },
+          {
+            category: 'Brochure',
+            title: 'Chemistry Inside Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/chemistryIn.jpg',
+            badge: 'Print Design',
+            shortDesc: 'A chemistry brochure inside page presenting the main informational content.',
+            desc: 'The inside page of the chemistry brochure, arranged to make educational content readable and visually organized.',
+          },          {
+            category: 'Infographics',
+            title: 'Flood Prone Map',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Posters/infoMap.png',
+            badge: 'Visual Data',
+            shortDesc: 'An infographic map design presenting researched information in a clear visual format.',
+            desc: 'InfoMap is an infographic layout created to organize research-based information into an easy-to-read visual presentation with structured hierarchy and clean design.',
+          },
+          {
+            category: 'Infographics',
+            title: 'Poster Design',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Posters/poster.png',
+            badge: 'Poster',
+            shortDesc: 'A poster design for ParkWise.',
+            desc: 'A poster design created to promote the ParkWise app, using bold visuals and clear messaging to capture attention and communicate the app\'s value proposition effectively.',
+          },
+          {
+            category: 'Digital Art',
+            title: 'Balloon Head',
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/balloonhead.png',
+            badge: 'Hand-Drawn',
+            shortDesc: 'An original hand-drawn digital artwork exploring different art styles.',
+            desc: 'Balloon Head the prouct of exploration into various digital art styles.',
+          },
+          {
+            category: 'Digital Art',
+            title: 'Chibi',
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/chibi.jpg',
+            badge: 'Hand-Drawn',
+            shortDesc: 'A hand-drawn chibi-style character illustration.',
+            desc: 'A chibi-style character illustration with playful proportions and soft visual personality.',
+          },
+          {
+            category: 'Digital Art',
+            title: 'Frog',
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/frog.jpg',
+            badge: 'Hand-Drawn',
+            shortDesc: 'A hand-drawn frog-themed digital illustration.',
+            desc: 'A frog-themed hand-drawn digital art piece created for the illustration collection, using expressive details and a personal drawing style.',
+           
+          },
+          {
+            category: 'Digital Art',
+            title: 'I\'m No Different',
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/Quijano_I_mNoDifferent.jpg',
+            badge: 'Hand-Drawn',
+            shortDesc: 'A hand-drawn digital illustration titled I\'m No Different.',
+            desc: 'I\'m No Different is an original hand-drawn digital artwork with a more personal, expressive visual direction.',
+           
+          },
+          {
+            category: 'Digital Art',
+            title: 'Requested Artwork',
+           
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/requested.png',
+            badge: 'Hand-Drawn',
+            shortDesc: 'A requested hand-drawn digital illustration.',
+            desc: 'A requested digital artwork created to meet specific client needs.',
+          
+          },
+          {
+            category: 'Digital Art',
+            title: 'Portrait',
+
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/Untitled149.jpg',
+            badge: 'Hand-Drawn',
+            shortDesc: 'A portrait hand-drawn digital art piece.',
+            desc: 'Hand-drawn digital portrait artwork created out of boredom and to improve drawing skills.',
+           
+          },
+          {
+            category: 'Digital Art',
+            title: 'Requested Character Art',
+            thumbClass: 'thumb-art',
+            image: 'assets/images/Image Editing/Untitled83_20220531011203.png',
+            badge: 'Hand-Drawn',
+            shortDesc: 'A requested hand-drawn character illustration.',
+            desc: 'A personalized character artwork that transforms the original design into a version that resembles the subject\'s facial features and appearance.',
+          },
+          {
+            category: 'Busy Book',
+            title: 'Filipino',
+            thumbClass: 'thumb-busy',
+            image: 'assets/images/Posters/filipino.png',
+            badge: 'Kids',
+            shortDesc: 'A Filipino activity book for children focused on vowels and early learning.',
+            desc: 'A Filipino activity book for kids designed to support early learning through engaging visuals, vowel practice, and child-friendly page layouts.',
+          },
+          {
+            category: 'Busy Book',
+            title: 'Math Busy Book',
+            thumbClass: 'thumb-busy',
+            image: 'assets/images/Posters/math.png',
+            badge: 'Kids',
+            shortDesc: 'A math activity book page designed for young learners.',
+            desc: 'A math busy book design for children, using colorful visuals and simple activities to teach numbers, shapes, and basic concepts.',
+          },
+          {
+            category: 'Busy Book',
+            title: 'Animal Busy Book',
+            thumbClass: 'thumb-busy',
+            image: 'assets/images/Posters/animal.png',
+            badge: 'Kids',
+            shortDesc: 'An animal-themed activity book page for children.',
+            desc: 'An animal-themed busy book design created for kids, combining playful visuals with educational content in a bright activity-book layout.',
+          },
+          {
+            category: 'Product Design',
+            title: 'Bostanten Bag',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/bostanten.jpg',
+            badge: 'E-Commerce',
+            shortDesc: 'A luxury-style product advertisement for a Bostanten bag.',
+            desc: 'A product design mockup for Bostanten, presenting the bag with a clean promotional layout suitable for e-commerce or social media advertising.',
+            
+          },
+          {
+            category: 'Product Design',
+            title: 'Alberto Shoes',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/alberto.jpg',
+            badge: 'E-Commerce',
+            shortDesc: 'A minimalist product catalog-style design for Alberto shoes.',
+            desc: 'A product layout for Alberto shoes, created with a simple catalog feel and clean advertising composition.',
+          },
+          {
+            category: 'Product Design',
+            title: 'Bliss Set',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/bliss.jpg',
+            badge: 'E-Commerce',
+            shortDesc: 'A lifestyle product poster design for a Bliss fashion set.',
+            desc: 'A product design poster for Bliss, using lifestyle-oriented composition to present a fashion set in an appealing way.',
+          },
+           {
+            category: 'Product Design',
+            title: 'Juicy Cologne',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/overJuicy.jpg',
+            badge: 'E-Commerce',
+            shortDesc: 'A product advertisement design for Juicy cologne.',
+            desc: 'A product advertising layout for Juicy cologne, designed with an e-commerce presentation style and polished visual composition.',
+           
+          },
+          {
+            category: 'Product Design',
+            title: 'Dreamsicle',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/38.png',
+            badge: 'Product',
+            shortDesc: 'A product design and advertising layout mockup collection.',
+            desc: 'A product-focused design piece created for visual advertising, emphasizing layout, presentation, and polished composition.',
+          },
+          {
+            category: 'Product Design',
+            title: 'Sprightly Sprinkle',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/40.png',
+            badge: 'Product',
+            shortDesc: 'A product design and advertising layout mockup collection.',
+            desc: 'A product-focused visual design created to present items in a clean, marketable, and polished layout.',
+          },
+          {
+            category: 'Product Design',
+            title: 'Orange Twist',
+            thumbClass: 'thumb-prod',
+            image: 'assets/images/Image Editing/41.png',
+            badge: 'Product',
+            shortDesc: 'A product advertising mockup with a polished visual composition.',
+            desc: 'A product design piece focused on clean visual hierarchy, brand-friendly presentation, and advertisement-style layout.',
+           
+          },
+         
+          
+          
+        ],
+        get filteredWorks() {
+          if (this.activeFilter === 'All') return this.works;
+          return this.works.filter(w => w.category === this.activeFilter);
+        },
+        openModal(item) { this.modal = item; },
+        scrollTo(id) {
+          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  </script>
+</body>
+</html>
