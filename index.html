@@ -9,15 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --teal-deep: #0a2e2e;
-      --teal-mid: #0d4f4f;
-      --teal-bright: #14b8a6;
-      --teal-light: #5eead4;
-      --gold: #f0c060;
-      --gold-light: #fde68a;
+      --plum-deep: #2b1024;
+      --plum-mid: #5f2140;
+      --pink-bright: #EC7FA9;
+      --pink-light: #FFB8E0;
+      --gold: #F9F6C4;
+      --gold-light: #fff6de;
       --white: #f0fafa;
       --glass: rgba(255,255,255,0.06);
-      --glass-border: rgba(94,234,212,0.15);
+      --glass-border: rgba(255,184,224,0.22);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +25,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--teal-deep);
+      background: var(--plum-deep);
       color: var(--white);
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
@@ -47,7 +47,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.1rem 3rem;
-      background: rgba(10,46,46,0.85);
+      background: rgba(43,16,36,0.88);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--glass-border);
     }
@@ -56,10 +56,13 @@
   font-weight: 800;
   font-size: .9rem;
   letter-spacing: .04em;
-  color: var(--teal-bright);
+  color: var(--pink-bright);
   display: flex;
   align-items: center;
   gap: .4rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
     }
    .nav-logo span {
   background: transparent;
@@ -88,7 +91,7 @@
       letter-spacing: .04em;
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--teal-light); }
+    .nav-links a:hover { color: var(--pink-light); }
 
     /* ── HERO ── */
     .hero {
@@ -107,7 +110,7 @@
       content: '';
       position: absolute;
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(20,184,166,.22) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(236,127,169,.24) 0%, transparent 65%);
       top: -100px; right: -100px;
       border-radius: 50%;
     }
@@ -120,19 +123,77 @@
       border-radius: 50%;
     }
 
-    .hero-text { z-index: 1; max-width: 620px; }
+    .hero-text { z-index: 1; max-width: 680px; }
+    .hero-cover {
+      display: grid;
+      grid-template-columns: minmax(240px, .95fr) minmax(260px, .8fr);
+      align-items: center;
+      gap: clamp(1.4rem, 4vw, 3rem);
+      margin-bottom: 2.2rem;
+    }
+    .hero-portfolio-art {
+      width: min(100%, 520px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(12px 14px 0 rgba(236,127,169,.26));
+    }
+    .hero-cover-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .9rem;
+      min-width: 0;
+    }
+    .hero-cover-name {
+      font-size: clamp(1.05rem, 1.8vw, 1.55rem);
+      line-height: 1.15;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,184,224,.55);
+      padding-bottom: .45rem;
+      width: min(100%, 360px);
+    }
+    .hero-cover-role {
+      font-size: clamp(.78rem, 1.2vw, .98rem);
+      color: rgba(240,250,250,.78);
+      font-weight: 600;
+    }
+    .hero-cover-contact {
+      list-style: none;
+      display: grid;
+      gap: .45rem;
+      padding: .9rem 1rem;
+      width: min(100%, 390px);
+      border: 1px solid rgba(255,184,224,.48);
+      background: rgba(255,255,255,.055);
+      color: rgba(240,250,250,.86);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+    .hero-cover-arrows {
+      width: min(150px, 42vw);
+      height: 42px;
+      overflow: hidden;
+      display: block;
+      background: url('assets/boxarrow.png') left bottom / 150px auto no-repeat;
+      filter: drop-shadow(0 8px 18px rgba(236,127,169,.22));
+    }
+    .hero-cover-arrows img {
+      display: none;
+    }
     .hero-eyebrow {
       font-size: .8rem;
       letter-spacing: .25em;
       text-transform: uppercase;
-      color: var(--teal-bright);
+      color: var(--pink-bright);
       margin-bottom: 1rem;
       display: flex; align-items: center; gap: .75rem;
     }
     .hero-eyebrow::before {
       content: '';
       display: block; width: 32px; height: 2px;
-      background: var(--teal-bright);
+      background: var(--pink-bright);
     }
     h1 {
       font-family: 'Syne', sans-serif;
@@ -142,8 +203,13 @@
       letter-spacing: -.02em;
       margin-bottom: 1.25rem;
     }
-    h1 .accent { color: var(--teal-bright); }
-    h1 .accent-gold { color: var(--gold); }
+    h1 .accent { color: var(--pink-bright); }
+    h1 .accent-gold {
+      background: linear-gradient(90deg, #FFB8E0 0%, #EC7FA9 48%, #F9F6C4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
     .hero-intro {
       display: inline-block;
@@ -174,7 +240,7 @@
       border: 1px solid var(--glass-border);
       border-radius: 100px;
       font-size: .78rem;
-      color: var(--teal-light);
+      color: var(--pink-light);
       background: var(--glass);
       letter-spacing: .03em;
     }
@@ -184,8 +250,8 @@
     }
     .btn-primary {
       padding: .85rem 2rem;
-      background: var(--teal-bright);
-      color: var(--teal-deep);
+      background: var(--pink-bright);
+      color: var(--plum-deep);
       border: none;
       border-radius: 10px;
       font-family: 'Poppins', sans-serif;
@@ -194,11 +260,11 @@
       letter-spacing: .04em;
       cursor: pointer;
       transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 0 0 rgba(20,184,166,0);
+      box-shadow: 0 0 0 0 rgba(236,127,169,0);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(20,184,166,.35);
+      box-shadow: 0 8px 30px rgba(236,127,169,.36);
     }
     .btn-ghost {
       padding: .85rem 2rem;
@@ -214,8 +280,8 @@
       transition: border-color .2s, background .2s;
     }
     .btn-ghost:hover {
-      border-color: var(--teal-bright);
-      background: rgba(20,184,166,.08);
+      border-color: var(--pink-bright);
+      background: rgba(236,127,169,.12);
     }
 
     /* ── HERO RIGHT (photo card) ── */
@@ -227,7 +293,7 @@
     .photo-frame {
       width: min(340px, 82vw); height: min(420px, 102vw);
       border-radius: 24px;
-      background: linear-gradient(135deg, var(--teal-mid), rgba(20,184,166,.2));
+      background: linear-gradient(135deg, var(--plum-mid), rgba(236,127,169,.22));
       border: 1px solid var(--glass-border);
       overflow: hidden;
       position: relative;
@@ -242,13 +308,13 @@
       font-family: 'Poppins', sans-serif;
       font-size: 12rem;
       font-weight: 800;
-      color: rgba(20,184,166,.08);
+      color: rgba(236,127,169,.12);
       line-height: 1;
       user-select: none;
     }
     .photo-label {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: rgba(10,46,46,.85);
+      background: rgba(43,16,36,.86);
       backdrop-filter: blur(10px);
       border-top: 1px solid var(--glass-border);
       padding: 1rem 1.5rem;
@@ -263,7 +329,7 @@
     }
     .photo-label small {
       font-size: .75rem;
-      color: var(--teal-light);
+      color: var(--pink-light);
       letter-spacing: .08em;
       text-transform: uppercase;
     }
@@ -272,7 +338,7 @@
       position: absolute;
       top: -16px; right: -24px;
       background: var(--gold);
-      color: var(--teal-deep);
+      color: var(--plum-deep);
       padding: .5rem .9rem;
       border-radius: 10px;
       font-family: 'Poppins', sans-serif;
@@ -290,7 +356,7 @@
       border-radius: 12px;
       padding: .75rem 1rem;
       font-size: .78rem;
-      color: var(--teal-light);
+      color: var(--pink-light);
     }
     .floating-tools span { display: block; color: rgba(240,250,250,.5); font-size: .7rem; margin-bottom: .3rem; }
 
@@ -306,13 +372,13 @@
       font-size: .75rem;
       letter-spacing: .25em;
       text-transform: uppercase;
-      color: var(--teal-bright);
+      color: var(--pink-bright);
       margin-bottom: .6rem;
       display: flex; align-items: center; gap: .6rem;
     }
     .section-eyebrow::before {
       content: ''; width: 20px; height: 2px;
-      background: var(--teal-bright);
+      background: var(--pink-bright);
       display: block;
     }
     .section-title {
@@ -326,25 +392,31 @@
     /* ── WORKS GRID ── */
     #works { background: rgba(255,255,255,.015); }
     .works-nav {
-      display: flex; gap: .5rem; flex-wrap: wrap;
+      display: flex; gap: 0; flex-wrap: wrap;
       margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--glass-border);
     }
     .works-filter {
-      padding: .4rem 1.1rem;
-      border-radius: 100px;
-      border: 1px solid var(--glass-border);
+      padding: .85rem 1.05rem;
+      border: 0;
+      border-bottom: 3px solid transparent;
       background: transparent;
       color: rgba(240,250,250,.6);
       font-size: .82rem;
       cursor: pointer;
-      transition: all .2s;
+      transition: color .2s, border-color .2s, background .2s;
       font-family: 'Poppins', sans-serif;
+      border-radius: 0;
     }
-    .works-filter.active,
+    .works-filter.active {
+      background: rgba(236,127,169,.08);
+      color: var(--pink-light);
+      border-color: var(--pink-bright);
+      font-weight: 600;
+    }
     .works-filter:hover {
-      background: var(--teal-bright);
-      color: var(--teal-deep);
-      border-color: var(--teal-bright);
+      color: var(--pink-light);
+      border-color: var(--pink-bright);
       font-weight: 600;
     }
 
@@ -366,7 +438,7 @@
     .work-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 20px 50px rgba(0,0,0,.35);
-      border-color: rgba(94,234,212,.3);
+      border-color: rgba(255,184,224,.38);
     }
     .work-card-thumb {
       width: 100%; aspect-ratio: 16/10;
@@ -428,7 +500,7 @@
       font-size: .72rem;
       letter-spacing: .15em;
       text-transform: uppercase;
-      color: var(--teal-bright);
+      color: var(--pink-bright);
       margin-bottom: .4rem;
     }
     .work-card-title {
@@ -446,34 +518,34 @@
     .work-badge {
       position: absolute;
       top: .8rem; right: .8rem;
-      background: rgba(10,46,46,.8);
+      background: rgba(43,16,36,.82);
       backdrop-filter: blur(8px);
       border: 1px solid var(--glass-border);
       border-radius: 100px;
       padding: .25rem .7rem;
       font-size: .7rem;
-      color: var(--teal-light);
+      color: var(--pink-light);
     }
 
     /* color themes for card thumbs */
-    .thumb-ui    { background: linear-gradient(135deg, #0d4f4f, #1a6b7a); }
-    .thumb-logo  { background: linear-gradient(135deg, #1a2a1a, #2a4a2a); }
-    .thumb-info  { background: linear-gradient(135deg, #1a1a3a, #2a2a5a); }
-    .thumb-art   { background: linear-gradient(135deg, #3a1a2a, #5a2a3a); }
-    .thumb-busy  { background: linear-gradient(135deg, #3a2a0a, #5a4a1a); }
-    .thumb-prod  { background: linear-gradient(135deg, #2a0a3a, #4a1a5a); }
-    .thumb-web   { background: linear-gradient(135deg, #0a2a3a, #1a4a5a); }
+    .thumb-ui    { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
+    .thumb-logo  { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
+    .thumb-info  { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
+    .thumb-art   { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
+    .thumb-busy  { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
+    .thumb-prod  { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
+    .thumb-web   { background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%); }
 
     /* ── MODAL ── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 200;
-      background: rgba(5,20,20,.85);
+      background: rgba(20,6,17,.86);
       backdrop-filter: blur(20px);
       display: flex; align-items: center; justify-content: center;
       padding: 2rem;
     }
     .modal-box {
-      background: linear-gradient(145deg, #0d3535, #0a2e2e);
+      background: linear-gradient(145deg, #5f2140, #2b1024);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
       max-width: 980px; width: 100%;
@@ -494,7 +566,7 @@
       display: flex; align-items: center; justify-content: center;
       transition: background .2s;
     }
-    .modal-close:hover { background: rgba(20,184,166,.2); }
+    .modal-close:hover { background: rgba(236,127,169,.22); }
     .modal-thumb {
       width: 100%; min-height: 160px;
       border-radius: 14px;
@@ -512,7 +584,7 @@
       filter: drop-shadow(0 18px 28px rgba(0,0,0,.38));
     }    .modal-cat {
       font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--teal-bright); margin-bottom: .5rem;
+      color: var(--pink-bright); margin-bottom: .5rem;
     }
     .modal-title {
       font-family: 'Poppins', sans-serif;
@@ -534,7 +606,7 @@
       display: flex;
       align-items: center;
       gap: .8rem;
-      color: var(--teal-light);
+      color: var(--pink-light);
       text-decoration: none;
       padding: .9rem 1rem;
       border: 1px solid var(--glass-border);
@@ -543,8 +615,8 @@
       transition: border-color .2s, background .2s, transform .2s;
     }
     .hire-link:hover {
-      border-color: var(--teal-bright);
-      background: rgba(20,184,166,.1);
+      border-color: var(--pink-bright);
+      background: rgba(236,127,169,.14);
       transform: translateY(-1px);
     }
     .hire-link img {
@@ -616,7 +688,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 1.1rem; font-weight: 700;
       margin-bottom: 1.2rem;
-      color: var(--teal-light);
+      color: var(--pink-light);
     }    .cert-card-button {
       width: 100%;
       text-align: left;
@@ -629,13 +701,13 @@
       transition: border-color .2s, background .2s, transform .2s;
     }
     .cert-card-button:hover {
-      border-color: var(--teal-bright);
-      background: rgba(20,184,166,.1);
+      border-color: var(--pink-bright);
+      background: rgba(236,127,169,.14);
       transform: translateY(-1px);
     }
     .cert-card-button strong {
       display: block;
-      color: var(--teal-light);
+      color: var(--pink-light);
       margin-bottom: .25rem;
     }
     .cert-card-button span {
@@ -659,7 +731,7 @@
     }
     .contact-icon {
       width: 32px; height: 32px;
-      background: rgba(20,184,166,.12);
+      background: rgba(236,127,169,.16);
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-size: .9rem;
@@ -674,7 +746,7 @@
       font-size: .82rem;
       color: rgba(240,250,250,.3);
     }
-    footer strong { color: var(--teal-bright); }
+    footer strong { color: var(--pink-bright); }
 
     /* ── SCROLL INDICATOR ── */
     .scroll-hint {
@@ -687,7 +759,7 @@
     }
     .scroll-line {
       width: 1px; height: 40px;
-      background: linear-gradient(to bottom, transparent, var(--teal-bright));
+      background: linear-gradient(to bottom, transparent, var(--pink-bright));
     }
     @keyframes bob {
       0%, 100% { transform: translateX(-50%) translateY(0); }
@@ -697,7 +769,7 @@
     /* ── DIVIDER ── */
     .divider {
       width: 60px; height: 3px;
-      background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+      background: linear-gradient(90deg, var(--pink-bright), var(--gold));
       border-radius: 100px;
       margin: 1.2rem 0 2rem;
     }
@@ -707,6 +779,9 @@
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-cover { grid-template-columns: 1fr; gap: 1.25rem; }
+      .hero-portfolio-art { width: min(100%, 390px); }
+      .hero-cover-info { max-width: 390px; }
       .hero-card { display: none; }
       section { padding: 4rem 1.5rem; }
       #about { grid-template-columns: 1fr; gap: 2rem; }
@@ -745,6 +820,569 @@
         transition: none;
       }
     }
+
+    /* Full cover hero */
+    .hero {
+      min-height: auto;
+      display: block;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-cover {
+      min-height: 64vh;
+      padding: 6rem clamp(2rem, 6vw, 4.8rem) 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      gap: clamp(1.25rem, 3vw, 2.25rem);
+    }
+    .hero-cover-main {
+      display: grid;
+      grid-template-columns: minmax(300px, .98fr) minmax(280px, .82fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      width: min(1000px, 100%);
+      margin: 0 auto;
+    }
+    .hero-cover .hero-portfolio-art {
+      width: min(100%, 520px);
+      justify-self: center;
+    }
+    .hero-cover .hero-cover-info {
+      gap: 1.25rem;
+    }
+    .hero-cover .hero-cover-name {
+      width: min(100%, 380px);
+      font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+      color: #fffaff;
+      margin: 0;
+    }
+    .hero-cover .hero-cover-role {
+      color: rgba(255,250,255,.9);
+    }
+    .hero-cover .hero-cover-contact {
+      width: min(100%, 430px);
+      padding: 1rem 1.15rem;
+      border-color: rgba(255,184,224,.75);
+      background: rgba(255,255,255,.07);
+      color: rgba(255,250,255,.95);
+      font-weight: 600;
+    }
+    .hero-cover-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+    }
+    .hero-cover-contact span {
+      width: 2.25rem;
+      flex: 0 0 2.25rem;
+      color: var(--pink-light);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .hero-cover-signature {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: .8rem;
+      width: min(1040px, 100%);
+      margin: 0 auto;
+      color: #fffaff;
+    }
+    .hero-cover-signature span {
+      height: 1px;
+      background: rgba(255,250,255,.58);
+    }
+    .hero-cover-signature strong {
+      font-size: .92rem;
+    }
+    .hero-cover-signature img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+    .hero-intro-panel {
+      min-height: 58vh;
+      display: grid;
+      grid-template-columns: minmax(260px, .8fr) minmax(320px, 1fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      padding: clamp(4rem, 8vw, 6.5rem) clamp(2rem, 6vw, 5rem);
+      background: linear-gradient(135deg, #075d66 0%, #21a978 100%);
+      color: #fff6de;
+    }
+    .hero-intro-portrait {
+      display: flex;
+      justify-content: center;
+      min-width: 0;
+    }
+    .intro-photo-frame {
+      width: min(320px, 75vw);
+      aspect-ratio: 1 / 1.12;
+      position: relative;
+      border: 3px solid rgba(255,255,255,.25);
+      border-radius: 20px;
+      overflow: visible;
+      background: rgba(255,255,255,.08);
+    }
+    .intro-photo-frame > img:first-child {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 16px;
+      display: block;
+    }
+    .curly-arrow {
+      position: absolute;
+      width: 82px;
+      height: auto;
+      z-index: 2;
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,.45));
+    }
+    .curly-left {
+      left: -52px;
+      top: 36%;
+    }
+    .curly-right {
+      right: -54px;
+      top: 34%;
+      transform: scaleX(-1);
+    }
+    .hero-intro-copy {
+      max-width: 620px;
+    }
+    .hero-intro-copy h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      color: #fff6de;
+      margin-bottom: 1.65rem;
+      letter-spacing: 0;
+    }
+    .hero-intro-copy p {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      line-height: 1.55;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.92);
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-cover-main,
+      .hero-intro-panel {
+        grid-template-columns: 1fr;
+      }
+      .hero-cover {
+        padding-top: 6.5rem;
+      }
+      .hero-cover-signature {
+        grid-template-columns: 1fr auto;
+      }
+      .hero-cover-signature strong {
+        display: none;
+      }
+      .hero-intro-panel {
+        text-align: left;
+      }
+    }
+
+    .hero-cover .hero-cover-name {
+      width: min(100%, 430px);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.62rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: #fffaff;
+      margin: 0;
+    }
+    .hero-cover .hero-cover-contact {
+      position: relative;
+      width: min(100%, 430px);
+      padding: 1rem 1.15rem;
+      border: 1px solid rgba(255,184,224,.82);
+      background: rgba(255,255,255,.07);
+      color: rgba(255,250,255,.95);
+      font-weight: 600;
+    }
+    .hero-cover .hero-cover-contact::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      left: -4px;
+      top: -4px;
+      background: #fffaff;
+      box-shadow: calc(100% + 430px - 2px) 0 0 #fffaff,
+                  0 calc(100% + 98px - 2px) 0 #fffaff,
+                  calc(100% + 430px - 2px) calc(100% + 98px - 2px) 0 #fffaff;
+    }
+    .hero-cover .hero-cover-contact::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 3px;
+      left: 50%;
+      top: -2px;
+      transform: translateX(-50%);
+      background: #fffaff;
+      box-shadow: 0 120px 0 #fffaff;
+    }
+    .hero-cover-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+    }
+    .hero-cover-contact .cover-icon {
+      width: 1.15rem;
+      flex: 0 0 1.15rem;
+      color: #fffaff;
+      display: inline-flex;
+      justify-content: center;
+      padding-top: .12rem;
+    }
+    .cover-icon svg {
+      width: 1.05rem;
+      height: 1.05rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+    }
+    .hero-cover-signature {
+      display: none;
+    }
+
+    .hero-cover .hero-cover-contact::before,
+    .hero-cover .hero-cover-contact::after {
+      content: none;
+    }
+    .hero-cover-contact .select-handle {
+      position: absolute;
+      display: block;
+      background: #fffaff;
+      padding: 0;
+      color: inherit;
+      flex: none;
+      pointer-events: none;
+    }
+    .hero-cover-contact .corner {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+    .hero-cover-contact .bar {
+      width: 12px;
+      height: 3px;
+      border-radius: 999px;
+    }
+    .hero-cover-contact .top-left { left: -3px; top: -3px; }
+    .hero-cover-contact .top-right { right: -3px; top: -3px; }
+    .hero-cover-contact .bottom-left { left: -3px; bottom: -3px; }
+    .hero-cover-contact .bottom-right { right: -3px; bottom: -3px; }
+    .hero-cover-contact .top-center { left: 50%; top: -2px; transform: translateX(-50%); }
+    .hero-cover-contact .bottom-center { left: 50%; bottom: -2px; transform: translateX(-50%); }
+    .hero-cover-contact .middle-left { left: -7px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+    .hero-cover-contact .middle-right { right: -7px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+    /* Old-style intro after portfolio cover */
+    .hero-intro-panel {
+      min-height: 72vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      padding: clamp(5rem, 8vw, 7rem) clamp(2rem, 6vw, 5rem);
+      background: transparent;
+      color: var(--white);
+      position: relative;
+    }
+    .hero-intro-copy {
+      max-width: 640px;
+      z-index: 1;
+    }
+    .hero-intro-copy .hero-eyebrow {
+      margin-bottom: 1.2rem;
+    }
+    .hero-intro-copy h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.7rem, 5.2vw, 5rem);
+      line-height: 1.02;
+      color: var(--gold-light);
+      margin-bottom: 1.45rem;
+      letter-spacing: 0;
+      font-weight: 800;
+    }
+    .hero-intro-copy p {
+      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      line-height: 1.7;
+      font-weight: 500;
+      letter-spacing: .01em;
+      color: rgba(240,250,250,.76);
+      margin-bottom: 1.45rem;
+    }
+    .hero-intro-portrait {
+      display: flex;
+      justify-content: center;
+      min-width: 0;
+      z-index: 1;
+    }
+    .intro-photo-card {
+      width: min(360px, 82vw);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--plum-mid), rgba(236,127,169,.24));
+      box-shadow: 0 30px 80px rgba(0,0,0,.4);
+      position: relative;
+    }
+    .intro-photo-frame {
+      width: 100%;
+      height: min(420px, 95vw);
+      position: relative;
+      overflow: hidden;
+      border: 0;
+      border-radius: 0;
+      background: rgba(255,255,255,.05);
+    }
+    .intro-photo-frame > img:first-child {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 0;
+      display: block;
+    }
+    .intro-photo-label {
+      background: rgba(43,16,36,.86);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--glass-border);
+      padding: 1rem 1.5rem;
+      text-align: center;
+    }
+    .intro-photo-label strong {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+    .intro-arrow {
+      position: absolute;
+      width: 92px;
+      height: auto;
+      z-index: 2;
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,.45));
+      pointer-events: none;
+    }
+    .intro-arrow-left {
+      left: -16px;
+      top: 38%;
+    }
+    .intro-arrow-right {
+      right: -16px;
+      top: 34%;
+      transform: scaleX(-1);
+    }
+    @media (max-width: 900px) {
+      .hero-intro-panel {
+        grid-template-columns: 1fr;
+        padding: 4rem 1.5rem;
+      }
+      .hero-intro-portrait {
+        order: -1;
+      }
+    }
+
+    .intro-arrow-left,
+    .intro-arrow-right {
+      display: none;
+    }
+    .intro-arrow-pair {
+      position: absolute;
+      width: min(430px, 122%);
+      max-width: none;
+      height: auto;
+      left: 50%;
+      top: 35%;
+      transform: translateX(-50%);
+      z-index: 2;
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,.45));
+      pointer-events: none;
+    }
+
+    .hero-scroll-between {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      transform: none;
+      margin: -1.4rem auto 1.2rem;
+      width: max-content;
+      z-index: 3;
+      color: rgba(255,184,224,.78);
+    }
+    .hero-scroll-between .scroll-line {
+      height: 34px;
+      background: linear-gradient(to bottom, transparent, #EC7FA9);
+    }
+    .hero-intro-copy h2 {
+      white-space: nowrap;
+      font-size: clamp(2.4rem, 4.7vw, 4.35rem);
+    }
+    .intro-photo-card {
+      overflow: visible;
+    }
+    .intro-photo-frame {
+      overflow: hidden;
+    }
+    .intro-arrow-pair {
+      width: min(330px, 95%);
+      left: 50%;
+      top: 34%;
+      transform: translateX(-50%);
+      opacity: .95;
+    }
+    .thumb-ui,
+    .thumb-logo,
+    .thumb-info,
+    .thumb-art,
+    .thumb-busy,
+    .thumb-prod,
+    .thumb-web {
+      background: linear-gradient(135deg, rgba(255,184,224,.76) 0%, rgba(236,127,169,.46) 48%, rgba(249,246,196,.78) 100%);
+    }
+    @media (max-width: 900px) {
+      .hero-intro-copy h2 {
+        white-space: normal;
+      }
+      .hero-scroll-between {
+        margin: .5rem auto 1.5rem;
+      }
+    }
+
+    .hero-cover {
+      padding-left: clamp(4rem, 8vw, 7rem);
+      padding-right: clamp(4rem, 8vw, 7rem);
+    }
+    .hero-cover-main {
+      width: min(1040px, 100%);
+      grid-template-columns: minmax(260px, .92fr) minmax(300px, .86fr);
+      gap: clamp(3rem, 7vw, 6.2rem);
+    }
+    .hero-cover .hero-portfolio-art,
+    .hero-portfolio-art {
+      width: min(100%, 480px);
+      filter: drop-shadow(6px 7px 0 rgba(236,127,169,.22));
+    }
+    .hero-cover .hero-cover-contact {
+      width: min(100%, 410px);
+    }
+    .hero-intro-panel {
+      padding-left: clamp(4rem, 8vw, 7rem);
+      padding-right: clamp(4rem, 8vw, 7rem);
+      gap: clamp(3rem, 7vw, 6rem);
+    }
+    .hero-intro-copy {
+      max-width: 590px;
+    }
+    .intro-photo-card {
+      width: min(335px, 76vw);
+    }
+    .intro-photo-frame {
+      height: min(390px, 88vw);
+    }
+    @media (max-width: 900px) {
+      .hero-cover,
+      .hero-intro-panel {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .hero-cover .hero-portfolio-art,
+      .hero-portfolio-art {
+        width: min(100%, 390px);
+      }
+    }
+
+    .intro-photo-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--plum-mid), rgba(236,127,169,.24));
+    }
+    .intro-photo-frame {
+      border: 0;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .intro-photo-frame > img:first-child {
+      border-radius: 0;
+      display: block;
+    }
+    .intro-photo-label {
+      border-radius: 0;
+    }
+
+    .hero-intro-copy p {
+      font-size: clamp(.88rem, 1.05vw, 1rem);
+      line-height: 1.62;
+      max-width: 560px;
+      margin-bottom: .9rem;
+    }
+    .hero-cover {
+      padding-bottom: .4rem;
+    }
+    .hero-intro-panel {
+      margin-top: 0;
+      padding-top: clamp(1.4rem, 3vw, 2.5rem);
+    }
+    .hero-cover {
+      min-height: calc(100vh - 76px);
+      padding-bottom: clamp(2.2rem, 5vw, 4rem);
+      justify-content: space-between;
+    }
+    .hero-cover-signature {
+      display: grid;
+      width: min(1040px, 100%);
+      margin-top: clamp(2rem, 5vw, 4rem);
+    }
+    .hero-cover-signature strong {
+      color: #fffaff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .hero-cover-signature img {
+      width: 42px;
+      height: 42px;
+    }
+    .hero-intro-panel {
+      padding-top: clamp(2.2rem, 5vw, 4rem);
+    }
+    #works,
+    #about {
+      padding-left: clamp(4rem, 8vw, 7rem);
+      padding-right: clamp(4rem, 8vw, 7rem);
+    }
+    footer {
+      padding-left: clamp(4rem, 8vw, 7rem);
+      padding-right: clamp(4rem, 8vw, 7rem);
+    }
+    @media (max-width: 900px) {
+      #works,
+      #about,
+      footer {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
     /* ANIMATION */
     [x-cloak] { display: none !important; }
     .fade-in { animation: fadeIn .4s ease; }
@@ -758,9 +1396,9 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">
-      <span><img src="assets/images/Logos/logaurZ.png" alt="logo"></span> zecellequijano
-    </div>
+    <button class="nav-logo" type="button" @click="scrollTo('hello')" aria-label="Go to Hello panel">
+      <span><img src="assets/pink z.png" alt="logo"></span> zc.eee
+    </button>
     <ul class="nav-links">
       <li><a href="#works">Works</a></li>
       <li><a href="#about">About</a></li>
@@ -772,45 +1410,67 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
-    <div class="hero-text reveal-on-scroll reveal-from-left">
-      <p class="hero-eyebrow">Graphic Designer | UI/UX </p>
-      <h1>
-        <span class="accent-gold">Portfolio</span>
-      </h1>
-      <p class="hero-desc">
-        <span class="hero-intro">Hi, I'm <strong style="color:var(--white)">Zecelle!</strong></span><br>
-        A Bachelor of Science in Information Systems student and self-taught graphic designer who enjoys creating clean, creative, and user-friendly visuals. My works are created for both academic and personal purposes, including logos, infographics, mobile app designs, and web interfaces.
-      </p>
-      <p class="hero-desc hero-desc-secondary">
-        Browse my work below and let's create something amazing together!
-      </p>
-      <div class="hero-tags">
-        <span class="tag">Canva</span>
-        <span class="tag">Photoshop</span>
-        <span class="tag">CapCut</span>
-        <span class="tag">Figma</span>
-        <span class="tag">HTML / Tailwind</span>
-        
-      </div>
-      <div class="hero-cta">
-        <button class="btn-primary" @click="scrollTo('works')">View My Work</button>
-        <button class="btn-ghost" @click="scrollTo('contact')">Contact Me</button>
-      </div>
-    </div>
-
-    <div class="hero-card reveal-on-scroll reveal-from-right">
-      <div class="photo-frame">
-        <img src="assets/images/Me .jpg" alt="Zecelle Photo" style="width:100%;height:100%;object-fit:cover;">
-         
-        <div class="photo-label">
-          <strong>Zecelle Quijano</strong>
+    <div class="hero-cover reveal-on-scroll reveal-from-left">
+      <div class="hero-cover-main">
+        <img class="hero-portfolio-art" src="assets/portfoliowow.png" alt="Portfolio">
+        <div class="hero-cover-info">
+          <div>
+            <h1 class="hero-cover-name">Zecelle Quijano</h1>
+            <p class="hero-cover-role">Graphic Designer | Editor | UI/UX</p>
+          </div>
+          <ul class="hero-cover-contact">
+            <li><span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9z"/></svg></span> +63 9121833954</li>
+            <li><span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg></span> quijanozelle@gmail.com</li>
+            <li><span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Panabo City, Davao del Norte, Philippines</li>
+            <span class="select-handle corner top-left"></span>
+            <span class="select-handle corner top-right"></span>
+            <span class="select-handle corner bottom-left"></span>
+            <span class="select-handle corner bottom-right"></span>
+            <span class="select-handle bar top-center"></span>
+            <span class="select-handle bar bottom-center"></span>
+            <span class="select-handle bar middle-left"></span>
+            <span class="select-handle bar middle-right"></span>
+          </ul>
+          <span class="hero-cover-arrows"><img src="assets/boxarrow.png" alt=""></span>
         </div>
       </div>
+      <div class="hero-cover-signature">
+        <span aria-hidden="true"></span>
+        <strong>zc.eee</strong>
+        <img src="assets/pink z.png" alt="Zecelle logo">
+      </div>
     </div>
 
-    <div class="scroll-hint">
-      <div class="scroll-line"></div>
-      scroll
+    <div id="hello" class="hero-intro-panel reveal-on-scroll">
+      <div class="hero-intro-copy reveal-on-scroll reveal-from-left">
+        <p class="hero-eyebrow">Graphic Designer | Editor | UI/UX</p>
+        <h2>Hello, I'm Zecelle!</h2>
+        <p>— a student and an aspiring graphic designer who is passionate about digital arts, image and video editing, and UI/UX design. My works have been created for both academic and personal purposes, including logos, infographics, mobile app designs, and web interfaces.</p>
+        <p>I am still learning and growing, and I am always open to new opportunities that will help me expand my skills, gain real-world experience, and contribute meaningfully to any team or project I become part of.</p>
+        <p>Browse my works below and let's create something meaningful together!</p>
+        <div class="hero-tags">
+          <span class="tag">Canva</span>
+          <span class="tag">Photoshop</span>
+          <span class="tag">CapCut</span>
+          <span class="tag">Figma</span>
+          <span class="tag">HTML</span>
+        </div>
+        <div class="hero-cta">
+          <button class="btn-primary" @click="scrollTo('works')">View My Work</button>
+          <button class="btn-ghost" @click="scrollTo('contact')">Contact Me</button>
+        </div>
+      </div>
+
+      <div class="hero-intro-portrait reveal-on-scroll reveal-from-right">
+        <div class="intro-photo-card">
+          <div class="intro-photo-frame">
+            <img src="assets/images/Me .jpg" alt="Zecelle Photo">
+          </div>
+          <div class="intro-photo-label">
+            <strong>Zecelle Quijano</strong>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -818,7 +1478,7 @@
   <section id="works">
     <div class="section-header reveal-on-scroll">
       <p class="section-eyebrow">Portfolio</p>
-      <h2 class="section-title">Design Space</h2>
+      <h2 class="section-title">My Design Space</h2>
       <div class="divider"></div>
     </div>
 
@@ -854,7 +1514,6 @@
           </div>          <div class="work-card-body">
             <p class="work-card-cat" x-text="item.category"></p>
             <h3 class="work-card-title" x-text="item.title"></h3>
-            <p class="work-card-desc" x-text="item.shortDesc"></p>
           </div>
         </div>
       </template>
@@ -868,17 +1527,14 @@
       <h2 class="section-title">Skills &<br>Background</h2>
       <div class="divider"></div>
       <p class="about-copy">
-        I'm a student passionate about <strong style="color:var(--teal-light)">graphic design, digital arts, and UI/UX.</strong> I'm also a certified <strong style="color:var(--teal-light)">Cisco NetAcad HTML Essentials</strong> completer.
-        <br>
-        In addition to my creative skills, I am also experienced in performing office clerk tasks. I can efficiently input and organize data using tools such as <strong style="color:var(--teal-light)">Microsoft Word and Excel </strong>, and <strong style="color:var(--teal-light)">Google workspaces </strong>.
-      </p>
+        I am currently a senior student under the Bachelor of Science in Information Systems program. I am passionate about <strong style="color:var(--pink-light)">graphic design, digital arts, UI/UX designs,</strong> as well as <strong style="color:var(--pink-light)">image and video editing</strong>. I edit <strong style="color:var(--pink-light)">CapCut templates</strong>, where I create creative edits for personal and content purposes. You may also visit my CapCut site to see more of my video edits and templates. </p>
+        <p  class="about-copy">I am also a certified <a href="assets/nectAcad HTML cert.png" target="_blank" rel="noopener" style="color:var(--pink-light);font-weight:700;text-decoration:none;"><u>Cisco NetAcad HTML Essentials</u></a> completer.</p>
+        <p class="about-copy">Through my personal and academic projects, I have developed my skills in creating organized, visually appealing, and user-friendly outputs. These experiences have helped me improve not only in design, but also in understanding how <strong style="color:var(--pink-light)">creativity</strong> and <strong style="color:var(--pink-light)">technology</strong> can work together.</p>
+        
+        <p class="about-copy">In addition to my creative skills, I am also experienced in performing office clerk tasks. I can efficiently input and organize data using tools such as <strong style="color:var(--pink-light)">Microsoft Word</strong> and <strong style="color:var(--pink-light)">Excel</strong>, and <strong style="color:var(--pink-light)">Google workspaces</strong>.
+          </p>
+     
       
-      <div class="about-card">
-        <h3>Cisco NetAcad HTML Essentials Certificate</h3>
-        <div class="cert-display">
-          <a href="assets/nectAcad HTML cert.png" target="_blank" rel="noopener"><img src="assets/nectAcad HTML cert.png" alt="Cisco NetAcad HTML Essentials certificate"></a>
-        </div>
-      </div>
     </div>
 
     <div id="contact" class="contact-column reveal-on-scroll">
@@ -898,14 +1554,20 @@
         <ul class="contact-list">
           <li>
             <span class="contact-icon"><img src="https://i.pinimg.com/1200x/b2/f8/28/b2f828513f21444829a619ce563d4d4e.jpg" alt="LinkedIn"></span>
-            <a href="https://www.linkedin.com/in/zecelle-quijano-989a17366" target="_blank" style="color:var(--teal-light);text-decoration:none;">
+            <a href="https://www.linkedin.com/in/zecelle-quijano-989a17366" target="_blank" style="color:var(--pink-light);text-decoration:none;">
               linkedin.com/in/zecelle-quijano-989a17366
             </a>
           </li>
           <li>
             <span class="contact-icon"><img src="https://youronlinerevenue.com/wp-content/uploads/2019/04/onlinejobs.ph-logog.jpeg" alt="OnlineJobs.ph"></span>
-            <a href="https://www.onlinejobs.ph/jobseekers/info/3863822" target="_blank" style="color:var(--teal-light);text-decoration:none;">
+            <a href="https://www.onlinejobs.ph/jobseekers/info/3863822" target="_blank" style="color:var(--pink-light);text-decoration:none;">
               onlinejobs.ph/jobseekers/info/3863822
+            </a>
+          </li>
+          <li>
+            <span class="contact-icon"><img src="https://www.pngall.com/wp-content/uploads/13/Capcut-Transparent.png" alt="CapCut"></span>
+            <a href="https://mobile.capcutshare.com/sv2/ZSQj97VeW/" target="_blank" rel="noopener" style="color:var(--pink-light);text-decoration:none;">
+              mobile.capcutshare.com/sv2/ZSQj97VeW
             </a>
           </li>
         </ul>
@@ -977,7 +1639,8 @@
         modal: null,
         hireModal: false,
         activeFilter: 'All',
-        categories: ['All','UI/UX','Logo','Brochure','Infographics','Digital Art','Busy Book','Product Design','Web Design'],        works: [
+        categories: ['All','UI/UX','Logo','Brochure','Infographics','Digital Art','Busy Book','Product Design',],        
+        works: [
           {
             category: 'UI/UX',
             title: 'ParkWise',
@@ -990,7 +1653,6 @@
           {
             category: 'UI/UX',
             title: 'DPAS',
-            emoji: '🚨',
             thumbClass: 'thumb-ui',
             image: 'assets/images/DPAS/DPAS.png',
             badge: 'Mobile App',
@@ -1005,7 +1667,7 @@
               { src: 'assets/images/DPAS/login.png', alt: 'HRIS login screen' },
               { src: 'assets/images/DPAS/dashboard.png', alt: 'HRIS dashboard screen' },
             ],
-            badge: 'Capstone',
+            badge: 'Web Design',
             shortDesc: 'A web-based HR system for the Department of Migrant Workers, built with Laravel & Tailwind.',
             desc: 'Currently serving as Project Developer for a capstone web system built for the Department of Migrant Workers. The system features an HR dashboard, employee management, and data modules developed using HTML, Tailwind CSS, Laravel, and MySQL. Zecelle handles both the UI design and front-end development.',   
           },
@@ -1144,6 +1806,15 @@
             badge: 'Poster',
             shortDesc: 'A poster design for ParkWise.',
             desc: 'A poster design created to promote the ParkWise app, using bold visuals and clear messaging to capture attention and communicate the app\'s value proposition effectively.',
+          },
+          {
+            category: 'Infographics',
+            title: 'Error Poster',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Posters/error 1poster.jpg',
+            badge: 'Poster',
+            shortDesc: 'A poster design with a bold visual concept.',
+            desc: 'A poster design created with a strong visual direction, organized layout, and attention-grabbing composition for academic or creative presentation.',
           },
           {
             category: 'Digital Art',
