@@ -554,35 +554,6 @@
       border-radius: 5px;
       background: #fff;
     }
-    .cert-link {
-      color: var(--teal-light);
-      background: transparent;
-      border: 0;
-      padding: 0;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-    .cert-box {
-      position: relative;
-      width: min(920px, 96vw);
-      max-height: 90vh;
-      background: #0d3535;
-      border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 1rem;
-      box-shadow: 0 40px 100px rgba(0,0,0,.6);
-    }
-    .cert-image {
-      width: 100%;
-      max-height: 82vh;
-      object-fit: contain;
-      display: block;
-      border-radius: 10px;
-      background: #fff;
-    }
 
     /* ── ABOUT ── */
     #about {
@@ -610,6 +581,31 @@
       margin-bottom: 1.75rem;
       max-width: 620px;
     }
+    .cert-display {
+      margin-top: 1.25rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,.06);
+    }
+    .cert-display a {
+      display: block;
+      cursor: pointer;
+    }
+    .cert-display img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+    }
+    .contact-column {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-column .about-card + .about-card {
+      margin-top: 1.25rem;
+    }
     .about-card {
       background: var(--glass);
       border: 1px solid var(--glass-border);
@@ -621,29 +617,31 @@
       font-size: 1.1rem; font-weight: 700;
       margin-bottom: 1.2rem;
       color: var(--teal-light);
+    }    .cert-card-button {
+      width: 100%;
+      text-align: left;
+      color: var(--white);
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: border-color .2s, background .2s, transform .2s;
     }
-    .skill-item {
-      margin-bottom: 1rem;
+    .cert-card-button:hover {
+      border-color: var(--teal-bright);
+      background: rgba(20,184,166,.1);
+      transform: translateY(-1px);
     }
-    .skill-header {
-      display: flex; justify-content: space-between;
-      font-size: .85rem;
-      margin-bottom: .4rem;
-      color: rgba(240,250,250,.8);
+    .cert-card-button strong {
+      display: block;
+      color: var(--teal-light);
+      margin-bottom: .25rem;
     }
-    .skill-bar {
-      height: 5px;
-      background: rgba(255,255,255,.08);
-      border-radius: 100px;
-      overflow: hidden;
-    }
-    .skill-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--teal-bright), var(--teal-light));
-      border-radius: 100px;
-      transition: width 1s ease;
-    }
-    .contact-list { list-style: none; }
+    .cert-card-button span {
+      color: rgba(240,250,250,.62);
+      font-size: .82rem;
+    }    .contact-list { list-style: none; }
     .contact-list li {
       display: flex; align-items: center; gap: .75rem;
       padding: .65rem 0;
@@ -717,6 +715,36 @@
       .works-grid { grid-template-columns: 1fr; }
     }
 
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal-from-left {
+      transform: translateX(-44px);
+    }
+    .reveal-from-right {
+      transform: translateX(44px);
+    }
+    .reveal-from-left.is-visible,
+    .reveal-from-right.is-visible {
+      transform: translateX(0);
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero .reveal-on-scroll {
+      transition-delay: .08s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
     /* ANIMATION */
     [x-cloak] { display: none !important; }
     .fade-in { animation: fadeIn .4s ease; }
@@ -744,14 +772,14 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
-    <div class="hero-text">
+    <div class="hero-text reveal-on-scroll reveal-from-left">
       <p class="hero-eyebrow">Graphic Designer | UI/UX </p>
       <h1>
         <span class="accent-gold">Portfolio</span>
       </h1>
       <p class="hero-desc">
         <span class="hero-intro">Hi, I'm <strong style="color:var(--white)">Zecelle!</strong></span><br>
-        A BSIS student and self-taught graphic designer who enjoys creating clean, creative, and user-friendly visuals. My works are created for both academic and personal purposes, including logos, infographics, mobile app designs, and web interfaces.
+        A Bachelor of Science in Information Systems student and self-taught graphic designer who enjoys creating clean, creative, and user-friendly visuals. My works are created for both academic and personal purposes, including logos, infographics, mobile app designs, and web interfaces.
       </p>
       <p class="hero-desc hero-desc-secondary">
         Browse my work below and let's create something amazing together!
@@ -770,7 +798,7 @@
       </div>
     </div>
 
-    <div class="hero-card">
+    <div class="hero-card reveal-on-scroll reveal-from-right">
       <div class="photo-frame">
         <img src="assets/images/Me .jpg" alt="Zecelle Photo" style="width:100%;height:100%;object-fit:cover;">
          
@@ -788,13 +816,13 @@
 
   <!-- WORKS -->
   <section id="works">
-    <div class="section-header">
+    <div class="section-header reveal-on-scroll">
       <p class="section-eyebrow">Portfolio</p>
       <h2 class="section-title">Design Space</h2>
       <div class="divider"></div>
     </div>
 
-    <div class="works-nav">
+    <div class="works-nav reveal-on-scroll">
       <template x-for="cat in categories" :key="cat">
         <button
           class="works-filter"
@@ -840,29 +868,24 @@
       <h2 class="section-title">Skills &<br>Background</h2>
       <div class="divider"></div>
       <p class="about-copy">
-        I'm a student passionate about <strong style="color:var(--teal-light)">graphic design, digital arts, and UI/UX.</strong> I'm currently the Project Developer for our capstone — building with HTML, Tailwind CSS, Laravel and MySQL. I'm also a certified <button type="button" class="cert-link" @click="certModal = true">Cisco NetAcad HTML Essentials</button> completer.
+        I'm a student passionate about <strong style="color:var(--teal-light)">graphic design, digital arts, and UI/UX.</strong> I'm currently the Project Developer for our capstone — building with HTML, Tailwind CSS, Laravel and MySQL. I'm also a certified <strong style="color:var(--teal-light)">Cisco NetAcad HTML Essentials</strong> completer.
+        <br>
+        In addition to my creative skills, I am also experienced in performing office clerk tasks. I can efficiently input and organize data using tools such as <strong style="color:var(--teal-light)">Microsoft Word and Excel </strong>, and <strong style="color:var(--teal-light)">Google workspaces </strong>.
       </p>
+      
       <div class="about-card">
-        <h3>Core Skills</h3>
-        <template x-for="skill in skills" :key="skill.name">
-          <div class="skill-item">
-            <div class="skill-header">
-              <span x-text="skill.name"></span>
-              <span x-text="skill.level + '%'"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" :style="'width:' + skill.level + '%'"></div>
-            </div>
-          </div>
-        </template>
+        <h3>Cisco NetAcad HTML Essentials Certificate</h3>
+        <div class="cert-display">
+          <a href="assets/nectAcad HTML cert.png" target="_blank" rel="noopener"><img src="assets/nectAcad HTML cert.png" alt="Cisco NetAcad HTML Essentials certificate"></a>
+        </div>
       </div>
     </div>
 
-    <div id="contact">
+    <div id="contact" class="contact-column reveal-on-scroll">
       <p class="section-eyebrow">Get in Touch</p>
       <h2 class="section-title">Contact &<br>Socials</h2>
       <div class="divider"></div>
-      <div class="about-card" style="margin-bottom:1.25rem;">
+      <div class="about-card">
         <h3>Contact Info</h3>
         <ul class="contact-list">
           <li><span class="contact-icon">📞</span> +63 9121833954</li>
@@ -889,7 +912,6 @@
       </div>
     </div>
   </section>
-
   <!-- FOOTER -->
   <footer>
     <p>Designed &amp; built by <strong>Zecelle Quijano</strong> · Graphic Designer · UI/UX </p>
@@ -949,31 +971,13 @@
       </div>
     </div>
   </div>
-  <!-- CERTIFICATE OVERLAY -->
-  <div class="modal-overlay fade-in" x-show="certModal" @click.self="certModal = false" x-transition>
-    <div class="cert-box" x-show="certModal" @click.stop>
-      <button class="modal-close" @click="certModal = false">✕</button>
-      <img class="cert-image" src="assets/nectAcad HTML cert.png" alt="Cisco NetAcad HTML Essentials certificate">
-    </div>
-  </div>
   <script>
     function portfolio() {
       return {
         modal: null,
-        certModal: false,
         hireModal: false,
         activeFilter: 'All',
-        categories: ['All','UI/UX','Logo','Brochure','Infographics','Digital Art','Busy Book','Product Design',],
-        skills: [
-          { name: 'Canva', level: 92 },
-          { name: 'Adobe Photoshop', level: 78 },
-          { name: 'UI/UX Design (Figma)', level: 80 },
-          { name: 'HTML / Tailwind CSS', level: 72 },
-          { name: 'Digital Illustration', level: 75 },
-          { name: 'Video Editing (CapCut)', level: 85 },
-          { name: 'Document Management', level: 88 },
-        ],
-        works: [
+        categories: ['All','UI/UX','Logo','Brochure','Infographics','Digital Art','Busy Book','Product Design','Web Design'],        works: [
           {
             category: 'UI/UX',
             title: 'ParkWise',
@@ -1078,6 +1082,15 @@
             shortDesc: 'A second ParkWise brochure page continuing the app information layout.',
             desc: 'A continuation of the ParkWise brochure design, supporting the app presentation with an organized and readable print layout.',
           },
+           {
+            category: 'Brochure',
+            title: 'Marxism Front Page',
+            thumbClass: 'thumb-info',
+            image: 'assets/images/Brochures/marxism.png',
+            badge: 'Print Design',
+            shortDesc: 'An academic brochure page about Marxism and popular culture.',
+            desc: 'A brochure design for an academic topic on Marxism and popular culture, arranged to make the information structured and readable.',
+          },
           {
             category: 'Brochure',
             title: 'Waste Management Close Page',
@@ -1096,15 +1109,7 @@
             shortDesc: 'A second environmental brochure page for waste management content.',
             desc: 'A continuation of the environmental brochure design, created to communicate waste management ideas in a clear and visual format.',
           },
-          {
-            category: 'Brochure',
-            title: 'Marxism Front Page',
-            thumbClass: 'thumb-info',
-            image: 'assets/images/Brochures/marxism.png',
-            badge: 'Print Design',
-            shortDesc: 'An academic brochure page about Marxism and popular culture.',
-            desc: 'A brochure design for an academic topic on Marxism and popular culture, arranged to make the information structured and readable.',
-          },
+         
           {
             category: 'Brochure',
             title: 'Chemistry Outside Page',
@@ -1181,13 +1186,11 @@
           {
             category: 'Digital Art',
             title: 'Requested Artwork',
-           
             thumbClass: 'thumb-art',
             image: 'assets/images/Image Editing/requested.png',
             badge: 'Hand-Drawn',
             shortDesc: 'A requested hand-drawn digital illustration.',
             desc: 'A requested digital artwork created to meet specific client needs.',
-          
           },
           {
             category: 'Digital Art',
@@ -1316,6 +1319,32 @@
         }
       }
     }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealItems = document.querySelectorAll('.reveal-on-scroll, .work-card');
+      const reveal = (entry) => entry.target.classList.add('is-visible');
+
+      if (!('IntersectionObserver' in window)) {
+        revealItems.forEach((item) => item.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reveal(entry);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+
+      revealItems.forEach((item, index) => {
+        item.classList.add('reveal-on-scroll');
+        item.style.transitionDelay = `${Math.min(index * 35, 180)}ms`;
+        observer.observe(item);
+      });
+    });
   </script>
 </body>
 </html>
