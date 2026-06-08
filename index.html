@@ -1363,6 +1363,10 @@
       width: 42px;
       height: 42px;
     }
+    .works-filter.active,
+    .works-filter:hover {
+      background: transparent;
+    }
     .hero-intro-panel {
       padding-top: clamp(2.2rem, 5vw, 4rem);
     }
@@ -1381,6 +1385,88 @@
       footer {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+      }
+    }
+    @media (max-width: 700px) {
+      nav {
+        padding: .95rem 1rem;
+      }
+      nav .btn-primary {
+        display: none;
+      }
+      .hero {
+        padding: 0;
+      }
+      .hero-cover {
+        min-height: calc(100svh - 64px);
+        padding: 5.1rem 1.15rem 1.35rem;
+        gap: 1rem;
+        justify-content: center;
+      }
+      .hero-cover-main {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 1.05rem;
+        justify-items: center;
+      }
+      .hero-cover .hero-portfolio-art,
+      .hero-portfolio-art {
+        width: min(82vw, 300px);
+        filter: drop-shadow(4px 5px 0 rgba(236,127,169,.2));
+      }
+      .hero-cover-info {
+        align-items: center;
+        width: 100%;
+        gap: .75rem;
+        text-align: center;
+      }
+      .hero-cover .hero-cover-name {
+        width: 100%;
+        max-width: 320px;
+        font-size: clamp(1.02rem, 5.2vw, 1.25rem);
+        line-height: 1.15;
+        white-space: normal;
+        padding-bottom: .35rem;
+      }
+      .hero-cover .hero-cover-role {
+        font-size: .78rem;
+      }
+      .hero-cover .hero-cover-contact {
+        width: min(100%, 305px);
+        padding: .85rem .8rem;
+        gap: .42rem;
+        font-size: clamp(.68rem, 3.25vw, .78rem);
+        text-align: left;
+      }
+      .hero-cover-contact li {
+        gap: .55rem;
+        overflow-wrap: anywhere;
+      }
+      .hero-cover-contact span.cover-icon {
+        width: 1.4rem;
+        flex-basis: 1.4rem;
+      }
+      .hero-cover-contact .select-handle {
+        display: none;
+      }
+      .hero-cover-arrows {
+        width: 110px;
+        height: 28px;
+        background-size: 110px auto;
+      }
+      .hero-cover-signature {
+        width: min(100%, 320px);
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: .45rem;
+        margin-top: .85rem;
+      }
+      .hero-cover-signature strong {
+        display: inline;
+        font-size: .72rem;
+      }
+      .hero-cover-signature img {
+        width: 30px;
+        height: 30px;
       }
     }
     /* ANIMATION */
@@ -1404,7 +1490,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="btn-primary" style="font-size:.82rem;padding:.6rem 1.3rem;" @click="hireModal = true">Hire Me</button>
+    <button class="btn-primary" style="font-size:.82rem;padding:.6rem 1.3rem;" @click="hireModal = true">Hire</button>
   </nav>
 
   <!-- HERO -->
